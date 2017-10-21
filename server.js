@@ -3,6 +3,7 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
+var bodyPareser = require('body-parser');
 
 var config = {
     host:'db.imad.hasura-app.io',
@@ -14,6 +15,7 @@ var config = {
 
 var app = express();
 app.use(morgan('combined'));
+app.use(bodyParser.json());
 
 /* var articles = {
    'article-one' : {
@@ -82,7 +84,12 @@ function hash (input,salt) {
     return ["pbkdf2Sync","10000",salt,hashed.toString('hex')].join('$');
 }
 
-app.get('/create-user', function(req,res){
+app.post('/create-user', function(req,res){
+   // username, password
+   // JSON
+   
+   var username = req.body.username;
+   var password = req.body.password;
    
    var salt = crypto.getRandomBytes(128).toString('hex');
    var dbString = hash(password,salt); 
