@@ -13,3 +13,9 @@ function moveRight () {
 img.onclick = function() {
     var interval = setInterval(moveRight, 2);
 } 
+
+/*var nameInput = document.getElementById('name');
+var name = nameInput.value;
+request.open('POST','http://sandeepgv1.hasura-app.io/submit-name?name=' + name, true);
+request.send(JSON.stringify({username: username, password: password}));
+*/
